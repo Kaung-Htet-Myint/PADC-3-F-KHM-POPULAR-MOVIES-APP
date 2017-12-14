@@ -16,7 +16,7 @@ import butterknife.ButterKnife;
 import khm.kaunghtetmyint.padc_3_f_khm_popular_movies_app.R;
 import khm.kaunghtetmyint.padc_3_f_khm_popular_movies_app.adpater.PopularMovieAdapter;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     @BindView(R.id.rv_popular_movies)
     RecyclerView rvPopularMovies;
