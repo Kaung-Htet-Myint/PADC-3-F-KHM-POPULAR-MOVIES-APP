@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import khm.kaunghtetmyint.padc_3_f_khm_popular_movies_app.R;
+import khm.kaunghtetmyint.padc_3_f_khm_popular_movies_app.delegates.MoviesActionDelegates;
 import khm.kaunghtetmyint.padc_3_f_khm_popular_movies_app.viewholder.ItemMoviesViewHolder;
 
 /**
@@ -15,12 +16,18 @@ import khm.kaunghtetmyint.padc_3_f_khm_popular_movies_app.viewholder.ItemMoviesV
  */
 
 public class PopularMovieAdapter extends RecyclerView.Adapter {
+
+    private MoviesActionDelegates mMoviesActionDelegates;
+
+    public PopularMovieAdapter(MoviesActionDelegates moviesActionDelegates){
+        mMoviesActionDelegates = moviesActionDelegates;
+    }
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View moviesItemView = inflater.inflate(R.layout.item_movies, parent ,false);
-        ItemMoviesViewHolder itemMoviesViewHolder = new ItemMoviesViewHolder(moviesItemView);
+        ItemMoviesViewHolder itemMoviesViewHolder = new ItemMoviesViewHolder(moviesItemView, mMoviesActionDelegates);
 
         return itemMoviesViewHolder;
     }

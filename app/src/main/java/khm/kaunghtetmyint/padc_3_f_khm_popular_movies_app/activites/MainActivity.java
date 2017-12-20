@@ -1,5 +1,6 @@
 package khm.kaunghtetmyint.padc_3_f_khm_popular_movies_app.activites;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,8 +16,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import khm.kaunghtetmyint.padc_3_f_khm_popular_movies_app.R;
 import khm.kaunghtetmyint.padc_3_f_khm_popular_movies_app.adpater.PopularMovieAdapter;
+import khm.kaunghtetmyint.padc_3_f_khm_popular_movies_app.delegates.MoviesActionDelegates;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity implements MoviesActionDelegates{
 
     @BindView(R.id.rv_popular_movies)
     RecyclerView rvPopularMovies;
@@ -45,7 +47,7 @@ public class MainActivity extends AppCompatActivity{
             }
         });*/
 
-        movieAdapter = new PopularMovieAdapter();
+        movieAdapter = new PopularMovieAdapter(this);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(),
                 LinearLayoutManager.VERTICAL, false);
@@ -75,5 +77,26 @@ public class MainActivity extends AppCompatActivity{
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onTapMoviesItem() {
+        Intent intent =new Intent(getApplication(),MoviesDetailsActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onTapMovieOverviewButton() {
+
+    }
+
+    @Override
+    public void onTapCropButton() {
+
+    }
+
+    @Override
+    public void onTapFavoriteButton() {
+
     }
 }

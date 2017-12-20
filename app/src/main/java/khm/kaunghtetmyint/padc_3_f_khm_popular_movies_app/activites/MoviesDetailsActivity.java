@@ -3,6 +3,7 @@ package khm.kaunghtetmyint.padc_3_f_khm_popular_movies_app.activites;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -39,6 +40,10 @@ public class MoviesDetailsActivity extends AppCompatActivity {
         ButterKnife.bind(this,this);
 
         setSupportActionBar(toolBar);
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null) {
+            actionBar.setDisplayShowTitleEnabled(false);
+        }
 
         moviesDetailsAdapter = new MoviesDetailsAdapter();
 
