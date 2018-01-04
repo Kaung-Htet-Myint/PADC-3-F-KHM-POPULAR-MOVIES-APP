@@ -1,5 +1,7 @@
 package khm.kaunghtetmyint.padc_3_f_khm_popular_movies_app.data.vo;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 /**
@@ -8,19 +10,39 @@ import java.util.List;
 
 public class MoviesVO {
 
+    @SerializedName("vote_count")
     private int voteCount;
+
     private int id;
     private boolean video;
+
+    @SerializedName("vote_average")
     private float voteAverage;
+
     private String title;
     private double popularity;
+
+    @SerializedName("poster_path")
     private String posterPath;
+
+    @SerializedName("original_language")
     private String originalLanguae;
+
+    @SerializedName("original_title")
     private String originalTitle;
+
+    @SerializedName("genre_ids")
     private List<Integer> genreId;
+
+    @SerializedName("backdrop_path")
     private String backdropPack;
+
     private boolean adult;
+
+    @SerializedName("overview")
     private String overView;
+
+    @SerializedName("release_date")
     private String releaseDate;
 
     public List<Integer> getGenreId() {

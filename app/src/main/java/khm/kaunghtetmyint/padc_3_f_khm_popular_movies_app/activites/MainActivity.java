@@ -8,15 +8,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import khm.kaunghtetmyint.padc_3_f_khm_popular_movies_app.MoviesApp;
 import khm.kaunghtetmyint.padc_3_f_khm_popular_movies_app.R;
 import khm.kaunghtetmyint.padc_3_f_khm_popular_movies_app.adpater.PopularMovieAdapter;
+import khm.kaunghtetmyint.padc_3_f_khm_popular_movies_app.data.models.MoviesModel;
 import khm.kaunghtetmyint.padc_3_f_khm_popular_movies_app.delegates.MoviesActionDelegates;
+import khm.kaunghtetmyint.padc_3_f_khm_popular_movies_app.event.LoadedMoviesEvent;
 
 public class MainActivity extends AppCompatActivity implements MoviesActionDelegates{
 
@@ -55,7 +63,23 @@ public class MainActivity extends AppCompatActivity implements MoviesActionDeleg
         rvPopularMovies.setLayoutManager(linearLayoutManager);
 
         rvPopularMovies.setAdapter(movieAdapter);
+
+        MoviesModel.getsObjInstance().loadNews();
     }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -99,4 +123,11 @@ public class MainActivity extends AppCompatActivity implements MoviesActionDeleg
     public void onTapFavoriteButton() {
 
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMoviesLoaded(LoadedMoviesEvent event){
+        Log.d(MoviesApp.LOG_TAG,"onMoviesLoaded :"+event.getMoviesList().size());
+        movieAdapter.setmMoviesList(event.getMoviesList());
+    }
+
 }
